@@ -1,0 +1,191 @@
+{
+  "model_type": "hybrid_quantized_bnn_10x8x3",
+  "deployment_profile": "p4_runtime",
+  "hidden_units": 8,
+  "feature_order": [
+    "ip_len",
+    "total_len",
+    "proto",
+    "tos",
+    "tcp_offset",
+    "max_packet_len",
+    "min_packet_len",
+    "max_ipd",
+    "min_ipd",
+    "last_ipd"
+  ],
+  "label_order": [
+    "emule",
+    "utorrent",
+    "vuze"
+  ],
+  "class_order": [
+    "emule",
+    "utorrent",
+    "vuze"
+  ],
+  "hidden_weights": [
+    [
+      0,
+      1,
+      0,
+      -1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      -1,
+      0,
+      0,
+      -1,
+      0,
+      -1,
+      -1
+    ],
+    [
+      -1,
+      0,
+      -1,
+      0,
+      0,
+      0,
+      -1,
+      0,
+      0,
+      0
+    ],
+    [
+      -1,
+      1,
+      -1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      -1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      -1
+    ],
+    [
+      0,
+      0,
+      0,
+      -1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "hidden_thresholds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "hidden_biases": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "output_weights": [
+    [
+      1,
+      0,
+      0,
+      -1,
+      -1,
+      -1,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      -1,
+      0
+    ],
+    [
+      -1,
+      0,
+      -1,
+      -1,
+      0,
+      -1,
+      0,
+      1
+    ]
+  ],
+  "output_biases": [
+    0,
+    -1,
+    0
+  ],
+  "encoding": {
+    "ternary_weight_values": {
+      "-1": -1,
+      "0": 0,
+      "+1": 1
+    },
+    "hidden_activation": "binary( acc > threshold )",
+    "input_type": "raw_integer_features"
+  }
+}

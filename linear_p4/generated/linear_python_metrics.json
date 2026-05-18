@@ -1,0 +1,87 @@
+{
+  "accuracy": 0.5434759807006503,
+  "confusion_matrix": {
+    "0": {
+      "0": 2388,
+      "1": 4809,
+      "2": 29
+    },
+    "1": {
+      "0": 636,
+      "1": 6815,
+      "2": 30
+    },
+    "2": {
+      "0": 313,
+      "1": 2888,
+      "2": 1160
+    }
+  },
+  "csv_float_reference_accuracy": 0.7615649770626884,
+  "csv_float_reference_macro_f1": 0.7620151967052283,
+  "csv_quantized_accuracy": 0.7567155208285172,
+  "csv_quantized_macro_f1": 0.757376207893718,
+  "evaluation": "redeal_json_state_replay",
+  "host_accuracy_spread": {
+    "h2": {
+      "accuracy": 0.3304732908939939,
+      "class": 0,
+      "correct": 2388,
+      "name": "emule",
+      "packets_predicted_to_host": 3337,
+      "support": 7226
+    },
+    "h3": {
+      "accuracy": 0.9109744686539233,
+      "class": 1,
+      "correct": 6815,
+      "name": "utorrent",
+      "packets_predicted_to_host": 14512,
+      "support": 7481
+    },
+    "h4": {
+      "accuracy": 0.2659940380646641,
+      "class": 2,
+      "correct": 1160,
+      "name": "vuze",
+      "packets_predicted_to_host": 1219,
+      "support": 4361
+    }
+  },
+  "l2_reg": 1.0,
+  "macro_f1": 0.4958858439667147,
+  "macro_precision": 0.7122746179575917,
+  "macro_recall": 0.5024805992041937,
+  "per_class": {
+    "0": {
+      "f1": 0.45214427719397904,
+      "name": "emule",
+      "precision": 0.7156128258915193,
+      "recall": 0.3304732908939939,
+      "support": 7226
+    },
+    "1": {
+      "f1": 0.6197426453871687,
+      "name": "utorrent",
+      "precision": 0.4696113561190739,
+      "recall": 0.9109744686539233,
+      "support": 7481
+    },
+    "2": {
+      "f1": 0.41577060931899645,
+      "name": "vuze",
+      "precision": 0.9515996718621821,
+      "recall": 0.2659940380646641,
+      "support": 4361
+    }
+  },
+  "quant_scale": 8192,
+  "record_count": 500,
+  "replay_float_quant_agreement": 0.9931298510593665,
+  "replay_float_reference_accuracy": 0.5429515418502202,
+  "replay_float_reference_macro_f1": 0.4968025152802835,
+  "speedup": 1000.0,
+  "start_index": 0,
+  "test_json": "../PeerRush/redeal_test.json",
+  "total": 19068
+}

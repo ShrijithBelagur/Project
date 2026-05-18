@@ -1,0 +1,18 @@
+{
+  "dataset": "PeerRush",
+  "label_order": ["emule", "utorrent", "vuze"],
+  "features": [
+    "ip_len",
+    "total_len",
+    "proto",
+    "tos",
+    "tcp_offset",
+    "max_packet_len",
+    "min_packet_len",
+    "max_ipd",
+    "min_ipd",
+    "last_ipd"
+  ],
+  "l2_reg": 1.0,
+  "quant_scale": 8192
+}
