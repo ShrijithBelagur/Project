@@ -1,2 +1,2 @@
-Please download the PeerRush dataset at this [link](https://drive.google.com/file/d/1JY_UcLr_ZrIfzYLEmCVPn3LMza_b_bhH/view)
+Please download the PeerRush dataset at this [link](https://drive.google.com/file/d/1JY_UcLr_ZrIfzYLEmCVPn3LMza_b_bhH/view). 
 Please make sure that after the download, the .csv and .json files lie in this directory 
