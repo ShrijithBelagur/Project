@@ -1,13 +1,7 @@
 # Machine Learning Inference in the Programmable Data Plane
 
-This repository contains the project code for PeerRush traffic classification in
-BMv2/Mininet using P4. The submitted code focuses on two model families:
-
-- `linear_p4`: fixed-point linear classifier with BMv2-relaxed and constrained
-  P4 variants.
-- `bnn_p4`: compact 10x8x3 quantized BNN with constrained and BMv2-relaxed P4
-  variants.
-
+This repository contains the source code and scripts for PeerRush traffic classification in
+BMv2/Mininet using P4.
 The benchmark topology uses one switch and four hosts:
 
 - `h1`: sender
@@ -15,28 +9,10 @@ The benchmark topology uses one switch and four hosts:
 - `h3`: class 1 sink, `utorrent`
 - `h4`: class 2 sink, `vuze`
 
-Predictions are inferred from the receiving host. No custom prediction headers
-are added to packets.
-
-## Repository Layout
-
-- `PeerRush/`: training/test CSV files and replay JSON files.
-- `linear_p4/scripts/train_linear.py`: trains/exports the linear model and
-  reports the replay-style Python baseline.
-- `linear_p4/scripts/load_linear_model_cli.py`: loads the linear model into
-  BMv2 registers for the relaxed P4 program.
-- `linear_p4/p4/`: linear P4 programs.
-- `bnn_p4/scripts/train_bnn.py`: trains/exports the BNN and reports the
-  replay-style Python baseline.
-- `bnn_p4/scripts/load_model_cli.py`: loads the BNN into BMv2 registers.
-- `bnn_p4/p4/`: BNN P4 programs.
-- `test_scripts/`: Mininet sender, receiver, and benchmark harness.
-- `run_benchmark.sh`: single entry point for P4 experiments.
-- `report_unified.tex`: technical report source.
 
 ## Environment
 
-Run the P4 benchmarks inside the P4 VM with:
+Run the P4 benchmarks inside the P4 VM (download from p4lang github) with:
 
 - Python 3
 - Scapy available to root/Mininet host commands
@@ -128,7 +104,7 @@ sudo bash run_benchmark.sh --count 500 --speedup 1000 \
 
 Expected runtime:
 
-- No-speedup 500-record replay: roughly 25-35 minutes.
+- No-speedup 500-record replay: roughly 17-25 minutes.
 - 1000x speedup 500-record replay: roughly 8-12 minutes per P4 run.
 
 Expected outputs:
@@ -149,6 +125,5 @@ control-plane loader:
 
 ## Notes
 
-The report PDF should discuss the scientific setup, model design, results, and
-interpretation. This README is the replication guide for getting the code and
-experiments running.
+The report PDF discusses the scientific setup, model design, results, and
+interpretation.
