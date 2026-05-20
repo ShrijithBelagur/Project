@@ -24,6 +24,20 @@ Run the P4 benchmarks inside the P4 VM (download from p4lang github) with:
 
 The Python training/evaluation scripts use `numpy` and `pandas`.
 
+## Dataset
+
+The PeerRush dataset is not committed to git (the replay JSONs are too large
+for GitHub's 100 MB limit). Download it from
+[this Google Drive link](https://drive.google.com/file/d/1JY_UcLr_ZrIfzYLEmCVPn3LMza_b_bhH/view)
+and place the `.csv` and `.json` files in `PeerRush/`. See
+[`PeerRush/README.md`](PeerRush/README.md). The training/evaluation
+scripts expect:
+
+- `PeerRush/PeerRush_train.csv`
+- `PeerRush/PeerRush_test.csv`
+- `PeerRush/redeal_train.json`
+- `PeerRush/redeal_test.json`
+
 ## Generate Python Baselines and Model Files
 
 From the repository root:
@@ -31,11 +45,10 @@ From the repository root:
 ```bash
 cd Project
 
-python3 train_peerrush_decision_tree.py
-python3 dt_to_p4_generator.py --model PeerRush/peerrush_model.joblib \
-  --bindings PeerRush/peerrush_bindings.json \
-  --out-json tree.json \
-  --out-p4 generated_tree.p4
+cd tree_p4
+python3 scripts/train_peerrush_decision_tree.py
+python3 scripts/dt_to_p4_generator.py
+cd ..
 
 cd linear_p4
 python3 scripts/train_linear.py --count 500 --speedup 1000
@@ -46,9 +59,16 @@ python3 scripts/train_bnn.py --count 500 --speedup 1000
 cd ..
 ```
 
+`dt_to_p4_generator.py` reads from `tree_p4/generated/` and writes the P4
+program to `tree_p4/p4_generated/`. Override with `--model`, `--bindings`,
+`--out-json`, `--out-p4` if needed.
+
 Expected outputs:
 
-- `generated_tree.p4`.
+- `tree_p4/generated/peerrush_model.joblib`
+- `tree_p4/generated/peerrush_bindings.json`
+- `tree_p4/generated/tree.json`
+- `tree_p4/p4_generated/generated_tree.p4`
 - `linear_p4/generated/linear_model.json`
 - `linear_p4/generated/linear_python_metrics.json`
 - `linear_p4/generated/linear_python_metrics.md`
@@ -76,7 +96,7 @@ Decision tree, 300-record replay, no speedup:
 
 ```bash
 cd Project
-sudo bash run_benchmark.sh --count 300 generated_tree.p4 PeerRush/redeal_test.json
+sudo bash run_benchmark.sh --count 300 tree_p4/p4_generated/generated_tree.p4 PeerRush/redeal_test.json
 ```
 
 Linear relaxed, no speedup:

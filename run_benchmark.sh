@@ -43,6 +43,7 @@ Examples:
   ./run_benchmark.sh bnn_p4/p4/peerrush_bnn_bmv2_relaxed.p4
   ./run_benchmark.sh linear_p4/p4/linear_bmv2_relaxed.p4
   ./run_benchmark.sh linear_p4/p4/linear_realswitch_constrained.p4
+  ./run_benchmark.sh tree_p4/p4_generated/generated_tree.p4
 
 Options:
   --count N               Limit replay to N records

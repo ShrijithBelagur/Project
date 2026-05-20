@@ -1,0 +1,54 @@
+{
+  "features": [
+    {
+      "name": "ip_len",
+      "p4_expr": "hdr.ipv4.ihl",
+      "type": "bit<4>"
+    },
+    {
+      "name": "total_len",
+      "p4_expr": "hdr.ipv4.totalLen",
+      "type": "bit<16>"
+    },
+    {
+      "name": "proto",
+      "p4_expr": "hdr.ipv4.protocol",
+      "type": "bit<8>"
+    },
+    {
+      "name": "tos",
+      "p4_expr": "hdr.ipv4.diffserv",
+      "type": "bit<8>"
+    },
+    {
+      "name": "tcp_offset",
+      "p4_expr": "hdr.tcp.dataOffset",
+      "type": "bit<4>"
+    },
+    {
+      "name": "max_packet_len",
+      "p4_expr": "meta.max_packet_len",
+      "type": "bit<16>"
+    },
+    {
+      "name": "min_packet_len",
+      "p4_expr": "meta.min_packet_len",
+      "type": "bit<16>"
+    },
+    {
+      "name": "max_ipd",
+      "p4_expr": "meta.max_ipd",
+      "type": "bit<32>"
+    },
+    {
+      "name": "min_ipd",
+      "p4_expr": "meta.min_ipd",
+      "type": "bit<32>"
+    },
+    {
+      "name": "last ipd",
+      "p4_expr": "meta.last_ipd",
+      "type": "bit<32>"
+    }
+  ]
+}

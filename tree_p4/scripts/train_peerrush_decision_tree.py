@@ -7,12 +7,14 @@ from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+TREE_DIR = PROJECT_ROOT / "tree_p4"
 PEERRUSH_DIR = PROJECT_ROOT / "PeerRush"
+GENERATED_DIR = TREE_DIR / "generated"
 TRAIN_CSV = PEERRUSH_DIR / "PeerRush_train.csv"
 TEST_CSV = PEERRUSH_DIR / "PeerRush_test.csv"
-MODEL_PATH = PEERRUSH_DIR / "peerrush_model.joblib"
-BINDINGS_PATH = PEERRUSH_DIR / "peerrush_bindings.json"
+MODEL_PATH = GENERATED_DIR / "peerrush_model.joblib"
+BINDINGS_PATH = GENERATED_DIR / "peerrush_bindings.json"
 
 MAX_DEPTH = 5
 RANDOM_STATE = 42
@@ -70,6 +72,7 @@ def main() -> None:
 
     bindings = build_bindings(list(x_train.columns))
 
+    GENERATED_DIR.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, MODEL_PATH)
     BINDINGS_PATH.write_text(json.dumps(bindings, indent=2))
 

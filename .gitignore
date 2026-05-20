@@ -1,0 +1,4 @@
+test_scripts/__pycache__/
+PeerRush/*.csv
+PeerRush/*.json
+build/
