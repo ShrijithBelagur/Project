@@ -1,0 +1,66 @@
+{
+    "directory config": {
+        "data": "/media/sf_Project/Project/",
+        "work": "/media/sf_Project/Project/Planter"
+    },
+    "model config": {
+        "model": "DT",
+        "type": "1",
+        "number of depth": 5,
+        "max number of leaf nodes": 1000,
+        "number of classes": 3,
+        "test table": "n"
+    },
+    "data config": {
+        "dataset": "PeerRush",
+        "number of features": 5,
+        "testing mode": "n"
+    },
+    "timer log": {
+        "load data": {
+            "start": 1779288959.0054295,
+            "end": 1779288964.6923912
+        }
+    },
+    "p4 config": {
+        "model": "DT",
+        "number of features": 5,
+        "number of classes": 3,
+        "table name": "Exact_Table.json",
+        "code table size": 162,
+        "width of feature": [
+            4,
+            15,
+            4,
+            9,
+            5
+        ],
+        "width of code": [
+            1.0,
+            6.0,
+            1.0,
+            3.0,
+            2.0
+        ],
+        "used columns": [
+            6,
+            9031,
+            7,
+            165,
+            16
+        ],
+        "width of probability": 7,
+        "width of result": 8
+    },
+    "test config": {
+        "type of test": "classification",
+        "port": "eth0",
+        "sudo password": "p4"
+    },
+    "target config": {
+        "architecture": "v1model",
+        "use case": "standard_classification",
+        "device": "bmv2",
+        "type": "software"
+    }
+}
