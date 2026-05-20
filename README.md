@@ -141,7 +141,7 @@ sudo bash run_benchmark.sh --count 500 --speedup 1000 \
 
 Expected runtime:
 
-- Decision-tree 300-record replay with normal timing: about 16-17 minutes
+- Decision-tree 300-record replay with normal timing: about 15-20 minutes
   (`1000.732 s` in the recorded run).
 - No-speedup 500-record replay: roughly 17-25 minutes.
 - 1000x speedup 500-record replay: roughly 8-12 minutes per P4 run.
@@ -203,40 +203,12 @@ Expected BNN results for the recorded 500-record runs:
 
 ## Latency baseline comparison
 
-`simple_p4/p4/simple_forward.p4` is a minimal "null classifier" pipeline that
-parses Ethernet/IPv4/TCP exactly like the classifier programs but forwards
-purely by destination MAC via a small `const entries` table — no flow state,
-no model evaluation, no math. Because `packet_sender.py` stamps the correct
-dst MAC for each packet's true class, this acts as a perfect classifier
-(accuracy ≈ 100%), so any latency difference between it and a classifier
-pipeline reflects pure model-evaluation cost in BMv2 — parser cost, table
-lookup, and Mininet veth overhead cancel out in the subtraction.
+`simple_p4/p4/simple_forward.p4` is a minimal "null classifier" pipeline.
 
 The metric of interest here is **per-packet latency**, not throughput.
 
-**What latency means in this benchmark.** For each packet, latency is the
-one-way end-to-end time `recv_time_ns - send_time_ns`, where `send_time_ns`
-is captured on `h1` immediately before `scapy.sendp()` returns
-([packet_sender.py:135](test_scripts/packet_sender.py#L135)) and
-`recv_time_ns` is captured on the receiving host the moment `scapy.sniff()`
-delivers the packet to its callback
-([packet_receiver.py:35](test_scripts/packet_receiver.py#L35)). Packets are
-matched send-to-receive by `TCP.seq` (the sender stamps the packet ID into
-that field). The reported `mean_latency_ms` therefore covers the full path
-`h1 sendp() → h1 veth → BMv2 ingress parser → P4 ingress pipeline → BMv2
-egress queue → hN veth → hN sniff callback` and includes everything that
-runs on the wall clock between those two timestamps. Dropped packets do
-not contribute. Latency is one-way (not round-trip); there is no response
-packet in this pipeline.
-
 Run the baseline and each classifier pipeline **without `--no-timing` and
-without `--speedup`** — i.e. natural trace pacing. `--no-timing` (and to a
-lesser extent very high speedups) sends packets back-to-back faster than
-BMv2 can drain them, so latency measurements get contaminated by queuing
-delay inside the switch rather than reflecting pure per-packet processing
-cost. Natural pacing keeps the inter-packet gaps wide enough for each
-packet to be fully processed and forwarded before the next arrives, so the
-reported latency is the per-packet cost we want to compare.
+without `--speedup`** — i.e. natural trace pacing.
 
 We baseline the pipelines for 30 records which contain a total of 642 packets.
 ```bash
@@ -251,10 +223,7 @@ sudo bash run_benchmark.sh --count 30 bnn_p4/p4/peerrush_bnn_bmv2_relaxed.p4
 sudo bash run_benchmark.sh --count 30 bnn_p4/p4/peerrush_bnn_constrained.p4
 ```
 
-Record `mean_latency_ms` (and the p50/p95/p99 percentiles the benchmark
-prints) for each run and tabulate next to the simple_p4 baseline. The
-**latency delta** vs. simple_p4 is the cleanest single indicator of per-packet
-classifier cost in BMv2. Expect roughly 2 minutes for the each 30-record run at
+Expect roughly 2 minutes for the each 30-record run at
 natural pacing.
 
 ### Recorded latency results (30 records, 652 packets sent, natural pacing)
@@ -271,30 +240,15 @@ baseline mean. `Drop` is the drop rate during the run.
 | `bnn_p4/peerrush_bnn_bmv2_relaxed.p4` | 20.982 | 6.880 | 267.298 | 15.067 | 60.602 | 96.925 | +1.067 | 1.84% |
 | `bnn_p4/peerrush_bnn_constrained.p4` | 24.479 | 7.833 | 223.404 | 17.726 | 71.329 | 122.615 | +4.564 | 3.83% |
 
-Observations from the recorded run:
-
-- The **multiplication-heavy** `linear_bmv2_relaxed` pipeline is the most
-  expensive (`+10.85 ms` over baseline) — explicit `int<16> * int<32>`
-  per-feature multiplies in BMv2 software dominate the cost.
-- The **shift-and-add** `linear_realswitch_constrained` variant collapses
-  the same logical work into bitwise shifts and adds and lands close to
-  baseline (`+1.40 ms`), confirming that the multiply is the bottleneck and
-  the hardware-targeted decomposition is faithful at a fraction of the cost.
-- **BNN relaxed** (binary xnor + popcount) is the lightest classifier
-  (`+1.07 ms`), nearly indistinguishable from the no-classifier baseline at
-  the mean.
-- The **decision tree** is mid-range (`+7.22 ms`); its cost grows with
-  branches taken per packet.
-- Tail (p99) and `max` latencies grow disproportionately for the relaxed
-  variants — long-tail packets reveal queueing inside BMv2 when bursts in
-  the trace arrive faster than the per-packet processing rate.
-
 Caveats:
 
 - BMv2 is a software simulator. Absolute latency numbers reflect BMv2-on-your-VM
   per-packet cost, not real hardware switch latency.
 
 ## Planter comparison
+https://github.com/In-Network-Machine-Learning/Planter/
+
+We compare Planter's decision tree model with the decision tree model implemented in this project.
 
 For a direct comparison against the [Planter](Planter/) in-network ML
 framework on the same PeerRush dataset, see [PlanterRun.md](PlanterRun.md).
@@ -306,8 +260,9 @@ instructions for launching and running Planter for a comparison.
 - The expected runtime is 15-30 minutes for the specifications provided in the PlanterRun.md file.
 
 ## Pegasus Run (For fun)
+https://github.com/afireswallow/Pegasus
 
-The [Pegasus](Pegasus/) directory contains the code from its repository.
+The [Pegasus](Pegasus/) directory contains the code from its repository with our patches.
 
 For step-by - step instructions on running Pegasus on the P4 dev VM - see [PegasusRun.md](PegasusRun.md).
 
