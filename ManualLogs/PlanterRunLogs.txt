@@ -1,0 +1,180 @@
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Planter$ python3 Planter.py -m
+ ____    ___                    __ 
+/\  _`\ /\_ \                  /\ \__ 
+\ \ \L\ \//\ \      __      ___\ \ ,_\    __  _ __ 
+ \ \ ,__/ \ \ \   /'__`\  /' _ `\ \ \/  /'__`/\`'__\ 
+  \ \ \/   \_\ \_/\ \L\.\_/\ \/\ \ \ \_/\  __\ \ \/ 
+   \ \_\   /\____\ \__/.\_\ \_\ \_\ \__\ \____\ \_\ 
+    \/_/   \/____/\/__/\/_/\/_/\/_/\/__/\/____/\/_/ 
+                                      Version 0.1.0
+
+Please set the following configurations:
++ Where is your data folder? (default = /media/sf_Project/Data) /media/sf_Project
++ Where is your Planter folder? (default = /media/sf_Project/Planter) ^C
+==============================================================================================
+=                                      Exiting Planter                                       =
+==============================================================================================
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Planter$ python3 Planter.py -m
+ ____    ___                    __ 
+/\  _`\ /\_ \                  /\ \__ 
+\ \ \L\ \//\ \      __      ___\ \ ,_\    __  _ __ 
+ \ \ ,__/ \ \ \   /'__`\  /' _ `\ \ \/  /'__`/\`'__\ 
+  \ \ \/   \_\ \_/\ \L\.\_/\ \/\ \ \ \_/\  __\ \ \/ 
+   \ \_\   /\____\ \__/.\_\ \_\ \_\ \__\ \____\ \_\ 
+    \/_/   \/____/\/__/\/_/\/_/\/_/\/__/\/____/\/_/ 
+                                      Version 0.1.0
+
+Please set the following configurations:
++ Where is your data folder? (default = /media/sf_Project/Data) /media/sf_Project/Project
++ Where is your Planter folder? (default = /media/sf_Project/Planter) 
++ Which model do you want to plant? (default = DT | options = -h) 
++ Which type (variation) of model do you want to plant? (default = 1 | options = -h) 
++ Which dataset do you want to use? (default = UNSW_5_tuple | options = -h) PeerRush
++ Where is the number of features? (default = 4) 5
+= PeerRush loader: train rows=1039708 (full PeerRush_train.csv)
+= PeerRush loader: redeal_test.json has 5442 records (flows)
++ How many test records (flows)? 0 = all, max 5442 (default = 0) 300
++ Test start index? (default = 0) 0
+= PeerRush loader: test records=300 (start=0), expanded to 11957 packet rows
+= src/configs/Planter_config.json is generated
++ Use the testing mode or not? (default = y) n
+= The shape of the dataset -  train x:  (1039708, 5) train y:  (1039708,) test x:  (11957, 5) test y:  (11957,)
+= src/configs/Planter_config.json is generated
+= Add the following path: /media/sf_Project/Planter/src/models/DT/Type_1
+- Number of depth? (default = 4) 5
+- Number of leaf nodes? (default = 1000) 
+
+               precision    recall  f1-score   support
+
+           0     0.9650    0.6701    0.7910      4726
+           1     0.7007    0.8812    0.7807      4950
+           2     0.6380    0.6852    0.6607      2281
+
+    accuracy                         0.7604     11957
+   macro avg     0.7679    0.7455    0.7441     11957
+weighted avg     0.7932    0.7604    0.7619     11957
+
+The table for Tree: 0 is generated
+Begine transfer: Feature table 0
+Input table has:  6 entries and:  2  different ranges, range match with default:  1 , and output TCAM entry has 4
+range match with default:  1
+6th testing sample with correct matches: 100.0 % and 0 errors. 
+Begine transfer: Feature table 1
+Input table has:  9031 entries and:  28  different ranges, range match with default:  28 , and output TCAM entry has 115
+range match with default:  28
+9031th testing sample with correct matches: 100.0 % and 0 errors. 
+Begine transfer: Feature table 2
+Input table has:  7 entries and:  2  different ranges, range match with default:  1 , and output TCAM entry has 4
+range match with default:  1
+7th testing sample with correct matches: 100.0 % and 0 errors. 
+Begine transfer: Feature table 3
+Input table has:  165 entries and:  4  different ranges, range match with default:  4 , and output TCAM entry has 15
+range match with default:  4
+165th testing sample with correct matches: 100.0 % and 0 errors. 
+Begine transfer: Feature table 4
+Input table has:  16 entries and:  3  different ranges, range match with default:  3 , and output TCAM entry has 6
+range match with default:  3
+16th testing sample with correct matches: 100.0 % and 0 errors. 
+Ternary_Table is generated
+Exact_Table is generated
+/media/sf_Project/Planter/src/configs/Planter_config.json is generated
++ Test the table or not? (default = y) n
+= src/configs/Planter_config.json is generated
++ Which architecture do you use? (default = tna | options = -h) v1model
++ Which is the use case? (default = performance | options = -h) standard_classification
+= Add the following path: /media/sf_Project/Planter/src/use_cases/standard_classification
+= Add the following path: /media/sf_Project/Planter/src/architectures/v1model
+Generating p4 files and load data file... Done
++ What is the target device? (default = Tofino | options = -h) bmv2
++ Which type of mode do you want to choose? (default = software | options = -h) software
+= Dump the targets info to src/configs/Planter_config.json
+= Add the following path: /media/sf_Project/Planter/src/targets/bmv2/software
+- Send packets to which port? (default = 'eth0'):   
+- Please input your password for 'sudo' command: 
+current pid is 71006
+Generating test files ...
+Join all subprocess together ...
+sudo mn -c
+*** Removing excess controllers/ofprotocols/ofdatapaths/pings/noxes
+killall controller ofprotocol ofdatapath ping nox_corelt-nox_core ovs-openflowd ovs-controllerovs-testcontroller udpbwtest mnexec ivs ryu-manager 2> /dev/null
+killall -9 controller ofprotocol ofdatapath ping nox_corelt-nox_core ovs-openflowd ovs-controllerovs-testcontroller udpbwtest mnexec ivs ryu-manager 2> /dev/null
+pkill -9 -f "sudo mnexec"
+*** Removing junk from /tmp
+rm -f /tmp/vconn* /tmp/vlogs* /tmp/*.out /tmp/*.log
+*** Removing old X11 tunnels
+*** Removing excess kernel datapaths
+ps ax | egrep -o 'dp[0-9]+' | sed 's/dp/nl:/'
+***  Removing OVS datapaths
+ovs-vsctl --timeout=1 list-br
+ovs-vsctl --timeout=1 list-br
+*** Removing all links of the pattern foo-ethX
+ip link show | egrep -o '([-_.[:alnum:]]+-eth[[:digit:]]+)'
+ip link show
+*** Killing stale mininet node processes
+pkill -9 -f mininet:
+*** Shutting down stale tunnels
+pkill -9 -f Tunnel=Ethernet
+pkill -9 -f .ssh/mn
+rm -f ~/.ssh/mn/*
+*** Cleanup complete.
+rm -f *.pcap
+rm -rf build pcaps logs
+mkdir -p build pcaps logs
+p4c-bm2-ss --p4v 16 --p4runtime-files build/DT_standard_classification_PeerRush.p4.p4info.txt -o build/DT_standard_classification_PeerRush.json DT_standard_classification_PeerRush.p4
+DT_standard_classification_PeerRush.p4(196): [--Wwarn=unused] warning: 'drop' is unused
+    action drop() {
+           ^^^^
+[--Wwarn=deprecated] warning: .txt format is being deprecated; use .txtpb instead
+sudo /home/p4/src/p4dev-python-venv/bin/python3 ../../utils/run_exercise.py -t topology.json -j build/DT_standard_classification_PeerRush.json -b simple_switch_grpc
+Reading topology file.
+Building mininet topology.
+Configuring switch s1 with file s1-commands.txt
+s1 -> gRPC port: 50051
+**********
+h1
+default interface: eth0	10.0.1.1	08:00:00:00:01:01
+**********
+Starting mininet CLI
+
+======================================================================
+Welcome to the BMV2 Mininet CLI!
+======================================================================
+Your P4 program is installed into the BMV2 software switch
+and your initial runtime configuration is loaded. You can interact
+with the network using the mininet CLI below.
+
+To inspect or change the switch configuration, connect to
+its CLI from your host operating system using this command:
+  simple_switch_CLI --thrift-port <switch thrift port>
+
+To view a switch log, run this command from your host OS:
+  tail -f /media/sf_Project/Planter/src/targets/bmv2/software/model_test/test_environment/logs/<switchname>.log
+
+To view the switch output pcap, check the pcap files in /media/sf_Project/Planter/src/targets/bmv2/software/model_test/test_environment/pcaps:
+ for example run:  sudo tcpdump -xxx -r s1-eth1.pcap
+
+To view the P4Runtime requests sent to the switch, check the
+corresponding txt file in /media/sf_Project/Planter/src/targets/bmv2/software/model_test/test_environment/logs:
+ for example run:  cat /media/sf_Project/Planter/src/targets/bmv2/software/model_test/test_environment/logs/s1-p4runtime-requests.txt
+
+mininet> Predicted load table time ... (1.409s)
+
+==============================================================================================
+=        Two steps to exit Planter: 1. input 'exit', press 'return'; 2. press ctrl + c       =
+==============================================================================================
+Test the switch model, the result should be the same as previous python test
+Switch model 11957th prediction: 0, test_y: 0, with acc: 0.763, with acc to sklearn: 0.9977, with error: 0.002258, M/A format macro f1: 0.7626, macro f1: 0.7604
+
+               precision    recall  f1-score   support
+
+           0     0.6758    0.9652    0.7950      3309
+           1     0.8812    0.7037    0.7825      6199
+           2     0.6852    0.6382    0.6609      2449
+
+    accuracy                         0.7626     11957
+   macro avg     0.7474    0.7690    0.7461     11957
+weighted avg     0.7842    0.7626    0.7611     11957
+
+======================================= Test Finished ========================================
+mininet> 
+Process <load data> cost 16.0403s

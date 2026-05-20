@@ -1,0 +1,340 @@
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 simple_p4/p4/simple_forward.p4 
+[1/3] Cleaning any stale Mininet state
+[2/3] Compiling simple_forward.p4 -> /media/sf_Project/Project/build/classifier.json
+simple_p4/p4/simple_forward.p4(43): [--Wwarn=mismatch] warning: MyIngress.mac_to_port: size 16 specified for table with constant entries
+    table mac_to_port {
+          ^^^^^^^^^^^
+simple_p4/p4/simple_forward.p4(46)
+        size = 16;
+               ^^
+[3/3] Starting BMv2 Mininet benchmark
+Running command: python3 /media/sf_Project/Project/test_scripts/mininet_benchmark.py --bmv2-json /media/sf_Project/Project/build/classifier.json --json-path /media/sf_Project/Project/PeerRush/redeal_test.json --simple-switch-bin simple_switch --thrift-port 9090 --cli-bin simple_switch_CLI --speedup 1.0 --start-index 0 --max-frame-size 1500 --count 30
+*** Creating network
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) (h4, s1) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+
+*** Starting 1 switches
+s1 
+[benchmark] sender started
+[benchmark] [empty file] /tmp/h1-sender.log
+[benchmark] [sender] replayed 4 records / 95 packets in 8.4s
+[benchmark] [sender] replayed 6 records / 131 packets in 12.7s
+[benchmark] [sender] replayed 7 records / 165 packets in 17.9s
+[benchmark] [sender] replayed 10 records / 191 packets in 21.3s
+[benchmark] [sender] replayed 12 records / 235 packets in 28.1s
+[benchmark] [sender] replayed 15 records / 281 packets in 33.5s
+[benchmark] [sender] replayed 17 records / 312 packets in 37.3s
+[benchmark] [sender] replayed 22 records / 387 packets in 43.5s
+[benchmark] [sender] replayed 26 records / 425 packets in 48.7s
+[benchmark] }
+=== PeerRush BMv2 Classification Benchmark ===
+Total runtime: 88.802 s
+Total packets sent: 652
+Total packets received: 624
+Total packets dropped: 28
+Drop rate: 4.2945%
+Classification accuracy: 95.7055%
+Aggregate throughput: 36.82 Kbps
+Latency ms: mean=19.915 min=3.349 max=276.188 p50=12.362 p95=71.330 p99=103.374
+Per-class accuracy:
+  class 0: 95.9484%
+  class 1: 92.8571%
+  class 2: 94.7368%
+Per-receiver throughput and mean latency:
+  h2/class 0: throughput=31.39 Kbps mean_latency=20.367 ms packets=521
+  h3/class 1: throughput=458.95 bps mean_latency=12.068 ms packets=13
+  h4/class 2: throughput=4.97 Kbps mean_latency=18.432 ms packets=90
+*** Stopping 0 controllers
+
+*** Stopping 4 links
+....
+*** Stopping 1 switches
+s1 Terminated
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 tree_p4/p4_generated/generated_tree.p4 
+[1/3] Cleaning any stale Mininet state
+[2/3] Compiling generated_tree.p4 -> /media/sf_Project/Project/build/classifier.json
+[3/3] Starting BMv2 Mininet benchmark
+Running command: python3 /media/sf_Project/Project/test_scripts/mininet_benchmark.py --bmv2-json /media/sf_Project/Project/build/classifier.json --json-path /media/sf_Project/Project/PeerRush/redeal_test.json --simple-switch-bin simple_switch --thrift-port 9090 --cli-bin simple_switch_CLI --speedup 1.0 --start-index 0 --max-frame-size 1500 --count 30
+*** Creating network
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) (h4, s1) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+
+*** Starting 1 switches
+s1 
+[benchmark] sender started
+[benchmark] [empty file] /tmp/h1-sender.log
+[benchmark] [sender] replayed 2 records / 64 packets in 6.9s
+[benchmark] [sender] replayed 5 records / 108 packets in 12.9s
+[benchmark] [sender] replayed 6 records / 131 packets in 16.0s
+[benchmark] [sender] replayed 10 records / 191 packets in 24.4s
+[benchmark] [sender] replayed 11 records / 218 packets in 28.4s
+[benchmark] [sender] replayed 14 records / 267 packets in 34.5s
+[benchmark] [sender] replayed 16 records / 292 packets in 38.1s
+[benchmark] [sender] replayed 20 records / 363 packets in 45.0s
+[benchmark] [sender] replayed 23 records / 401 packets in 49.9s
+[benchmark] [sender] replayed 26 records / 425 packets in 53.0s
+[benchmark] [sender] replayed 27 records / 631 packets in 84.2s
+[benchmark] }
+=== PeerRush BMv2 Classification Benchmark ===
+Total runtime: 96.072 s
+Total packets sent: 652
+Total packets received: 633
+Total packets dropped: 19
+Drop rate: 2.9141%
+Classification accuracy: 75.1534%
+Aggregate throughput: 34.59 Kbps
+Latency ms: mean=27.136 min=4.126 max=2017.625 p50=14.607 p95=76.186 p99=134.932
+Per-class accuracy:
+  class 0: 79.5580%
+  class 1: 92.8571%
+  class 2: 47.3684%
+Per-receiver throughput and mean latency:
+  h2/class 0: throughput=24.13 Kbps mean_latency=27.346 ms packets=432
+  h3/class 1: throughput=7.61 Kbps mean_latency=25.585 ms packets=156
+  h4/class 2: throughput=2.98 Kbps mean_latency=30.496 ms packets=45
+*** Stopping 0 controllers
+
+*** Stopping 4 links
+....
+*** Stopping 1 switches
+s1 Terminated
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 linear_p4/p4/linear_bmv2_relaxed.p4 
+[1/3] Cleaning any stale Mininet state
+[2/3] Compiling linear_bmv2_relaxed.p4 -> /media/sf_Project/Project/build/classifier.json
+[3/3] Starting BMv2 Mininet benchmark
+Running command: python3 /media/sf_Project/Project/test_scripts/mininet_benchmark.py --bmv2-json /media/sf_Project/Project/build/classifier.json --json-path /media/sf_Project/Project/PeerRush/redeal_test.json --simple-switch-bin simple_switch --thrift-port 9090 --cli-bin simple_switch_CLI --speedup 1.0 --start-index 0 --max-frame-size 1500 --control-plane-type linear --control-plane-loader /media/sf_Project/Project/linear_p4/scripts/load_linear_model_cli.py --model-path /media/sf_Project/Project/linear_p4/generated/linear_model.json --count 30
+*** Creating network
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) (h4, s1) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+
+*** Starting 1 switches
+s1 
+[benchmark] loading control plane: python3 /media/sf_Project/Project/linear_p4/scripts/load_linear_model_cli.py --model /media/sf_Project/Project/linear_p4/generated/linear_model.json --thrift-port 9090 --cli-bin simple_switch_CLI --bmv2-json /media/sf_Project/Project/build/classifier.json
+[benchmark] sender started
+[benchmark] [empty file] /tmp/h1-sender.log
+[benchmark] [sender] replayed 2 records / 64 packets in 6.7s
+[benchmark] [sender] replayed 5 records / 108 packets in 10.5s
+[benchmark] [sender] replayed 6 records / 131 packets in 13.9s
+[benchmark] [sender] replayed 10 records / 191 packets in 22.0s
+[benchmark] [sender] replayed 11 records / 218 packets in 26.7s
+[benchmark] [sender] replayed 13 records / 243 packets in 31.5s
+[benchmark] [sender] replayed 15 records / 281 packets in 38.7s
+[benchmark] [sender] replayed 19 records / 344 packets in 44.9s
+[benchmark] [sender] replayed 22 records / 387 packets in 49.5s
+[benchmark] [sender] replayed 25 records / 417 packets in 53.7s
+[benchmark] [sender] replayed 26 records / 425 packets in 55.4s
+[benchmark] [sender] replayed 28 records / 642 packets in 90.3s
+[benchmark] }
+=== PeerRush BMv2 Classification Benchmark ===
+Total runtime: 101.116 s
+Total packets sent: 652
+Total packets received: 625
+Total packets dropped: 27
+Drop rate: 4.1411%
+Classification accuracy: 34.5092%
+Aggregate throughput: 32.80 Kbps
+Latency ms: mean=30.762 min=5.577 max=1408.229 p50=16.483 p95=87.063 p99=184.930
+Per-class accuracy:
+  class 0: 39.4107%
+  class 1: 35.7143%
+  class 2: 6.3158%
+Per-receiver throughput and mean latency:
+  h2/class 0: throughput=12.51 Kbps mean_latency=33.468 ms packets=258
+  h3/class 1: throughput=17.55 Kbps mean_latency=28.178 ms packets=325
+  h4/class 2: throughput=2.85 Kbps mean_latency=34.136 ms packets=42
+*** Stopping 0 controllers
+
+*** Stopping 4 links
+....
+*** Stopping 1 switches
+s1 Terminated
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 linear_p4/p4/linear_realswitch_constrained.p4 
+[1/3] Cleaning any stale Mininet state
+[2/3] Compiling linear_realswitch_constrained.p4 -> /media/sf_Project/Project/build/classifier.json
+[3/3] Starting BMv2 Mininet benchmark
+Running command: python3 /media/sf_Project/Project/test_scripts/mininet_benchmark.py --bmv2-json /media/sf_Project/Project/build/classifier.json --json-path /media/sf_Project/Project/PeerRush/redeal_test.json --simple-switch-bin simple_switch --thrift-port 9090 --cli-bin simple_switch_CLI --speedup 1.0 --start-index 0 --max-frame-size 1500 --count 30
+*** Creating network
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) (h4, s1) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+
+*** Starting 1 switches
+s1 
+[benchmark] sender started
+[benchmark] [empty file] /tmp/h1-sender.log
+[benchmark] [sender] replayed 5 records / 108 packets in 8.6s
+[benchmark] [sender] replayed 6 records / 131 packets in 11.9s
+[benchmark] [sender] replayed 9 records / 181 packets in 18.2s
+[benchmark] [sender] replayed 10 records / 191 packets in 19.9s
+[benchmark] [sender] replayed 13 records / 243 packets in 27.7s
+[benchmark] [sender] replayed 16 records / 292 packets in 33.4s
+[benchmark] [sender] replayed 19 records / 344 packets in 38.3s
+[benchmark] [sender] replayed 22 records / 387 packets in 42.0s
+[benchmark] [sender] replayed 26 records / 425 packets in 46.7s
+[benchmark] [sender] replayed 28 records / 642 packets in 78.4s
+[benchmark] }
+=== PeerRush BMv2 Classification Benchmark ===
+Total runtime: 89.722 s
+Total packets sent: 652
+Total packets received: 636
+Total packets dropped: 16
+Drop rate: 2.4540%
+Classification accuracy: 42.6380%
+Aggregate throughput: 37.04 Kbps
+Latency ms: mean=21.318 min=5.634 max=568.899 p50=13.738 p95=67.752 p99=104.834
+Per-class accuracy:
+  class 0: 50.8287%
+  class 1: 14.2857%
+  class 2: 0.0000%
+Per-receiver throughput and mean latency:
+  h2/class 0: throughput=14.67 Kbps mean_latency=23.719 ms packets=334
+  h3/class 1: throughput=22.43 Kbps mean_latency=18.663 ms packets=302
+  h4/class 2: throughput=0.00 bps mean_latency=0.000 ms packets=0
+*** Stopping 0 controllers
+
+*** Stopping 4 links
+....
+*** Stopping 1 switches
+s1 Terminated
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 bnn_p4/
+generated/ p4/        scripts/   
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 bnn_p4/p4/peerrush_bnn_
+peerrush_bnn_bmv2_relaxed.p4  peerrush_bnn_constrained.p4   
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 bnn_p4/p4/peerrush_bnn_bmv2_relaxed.p4 
+[1/3] Cleaning any stale Mininet state
+[2/3] Compiling peerrush_bnn_bmv2_relaxed.p4 -> /media/sf_Project/Project/build/classifier.json
+[3/3] Starting BMv2 Mininet benchmark
+Running command: python3 /media/sf_Project/Project/test_scripts/mininet_benchmark.py --bmv2-json /media/sf_Project/Project/build/classifier.json --json-path /media/sf_Project/Project/PeerRush/redeal_test.json --simple-switch-bin simple_switch --thrift-port 9090 --cli-bin simple_switch_CLI --speedup 1.0 --start-index 0 --max-frame-size 1500 --control-plane-type bnn --control-plane-loader /media/sf_Project/Project/bnn_p4/scripts/load_model_cli.py --model-path /media/sf_Project/Project/bnn_p4/generated/model.json --count 30
+*** Creating network
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) (h4, s1) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+
+*** Starting 1 switches
+s1 
+[benchmark] loading control plane: python3 /media/sf_Project/Project/bnn_p4/scripts/load_model_cli.py --model /media/sf_Project/Project/bnn_p4/generated/model.json --thrift-port 9090 --cli-bin simple_switch_CLI --bmv2-json /media/sf_Project/Project/build/classifier.json
+[benchmark] sender started
+[benchmark] [empty file] /tmp/h1-sender.log
+[benchmark] [sender] replayed 2 records / 64 packets in 8.0s
+[benchmark] [sender] replayed 5 records / 108 packets in 13.5s
+[benchmark] [sender] replayed 6 records / 131 packets in 17.0s
+[benchmark] [sender] replayed 9 records / 181 packets in 22.6s
+[benchmark] [sender] replayed 11 records / 218 packets in 27.2s
+[benchmark] [sender] replayed 14 records / 267 packets in 32.8s
+[benchmark] [sender] replayed 17 records / 312 packets in 38.0s
+[benchmark] [sender] replayed 21 records / 376 packets in 43.4s
+[benchmark] [sender] replayed 26 records / 425 packets in 48.4s
+[benchmark] [sender] replayed 27 records / 631 packets in 77.8s
+[benchmark] }
+=== PeerRush BMv2 Classification Benchmark ===
+Total runtime: 89.809 s
+Total packets sent: 652
+Total packets received: 640
+Total packets dropped: 12
+Drop rate: 1.8405%
+Classification accuracy: 1.9939%
+Aggregate throughput: 37.46 Kbps
+Latency ms: mean=20.982 min=6.880 max=267.298 p50=15.067 p95=60.602 p99=96.925
+Per-class accuracy:
+  class 0: 0.0000%
+  class 1: 92.8571%
+  class 2: 0.0000%
+Per-receiver throughput and mean latency:
+  h2/class 0: throughput=0.00 bps mean_latency=0.000 ms packets=0
+  h3/class 1: throughput=37.88 Kbps mean_latency=20.982 ms packets=640
+  h4/class 2: throughput=0.00 bps mean_latency=0.000 ms packets=0
+*** Stopping 0 controllers
+
+*** Stopping 4 links
+....
+*** Stopping 1 switches
+s1 Terminated
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$ sudo bash run_benchmark.sh --count 30 bnn_p4/p4/peerrush_bnn_constrained.p4 
+[1/3] Cleaning any stale Mininet state
+[2/3] Compiling peerrush_bnn_constrained.p4 -> /media/sf_Project/Project/build/classifier.json
+[3/3] Starting BMv2 Mininet benchmark
+Running command: python3 /media/sf_Project/Project/test_scripts/mininet_benchmark.py --bmv2-json /media/sf_Project/Project/build/classifier.json --json-path /media/sf_Project/Project/PeerRush/redeal_test.json --simple-switch-bin simple_switch --thrift-port 9090 --cli-bin simple_switch_CLI --speedup 1.0 --start-index 0 --max-frame-size 1500 --control-plane-type bnn --control-plane-loader /media/sf_Project/Project/bnn_p4/scripts/load_model_cli.py --model-path /media/sf_Project/Project/bnn_p4/generated/model.json --count 30
+*** Creating network
+*** Adding hosts:
+h1 h2 h3 h4 
+*** Adding switches:
+s1 
+*** Adding links:
+(h1, s1) (h2, s1) (h3, s1) (h4, s1) 
+*** Configuring hosts
+h1 h2 h3 h4 
+*** Starting controller
+
+*** Starting 1 switches
+s1 
+[benchmark] loading control plane: python3 /media/sf_Project/Project/bnn_p4/scripts/load_model_cli.py --model /media/sf_Project/Project/bnn_p4/generated/model.json --thrift-port 9090 --cli-bin simple_switch_CLI --bmv2-json /media/sf_Project/Project/build/classifier.json
+[benchmark] sender started
+[benchmark] [empty file] /tmp/h1-sender.log
+[benchmark] [sender] replayed 4 records / 95 packets in 7.8s
+[benchmark] [sender] replayed 6 records / 131 packets in 12.4s
+[benchmark] [sender] replayed 8 records / 173 packets in 18.0s
+[benchmark] [sender] replayed 10 records / 191 packets in 20.3s
+[benchmark] [sender] replayed 13 records / 243 packets in 28.4s
+[benchmark] [sender] replayed 14 records / 267 packets in 31.7s
+[benchmark] [sender] replayed 17 records / 312 packets in 37.9s
+[benchmark] [sender] replayed 20 records / 363 packets in 42.4s
+[benchmark] [sender] replayed 24 records / 409 packets in 48.3s
+[benchmark] [sender] replayed 26 records / 425 packets in 50.2s
+[benchmark] }
+=== PeerRush BMv2 Classification Benchmark ===
+Total runtime: 89.856 s
+Total packets sent: 652
+Total packets received: 627
+Total packets dropped: 25
+Drop rate: 3.8344%
+Classification accuracy: 2.1472%
+Aggregate throughput: 36.16 Kbps
+Latency ms: mean=24.479 min=7.833 max=223.404 p50=17.726 p95=71.329 p99=122.615
+Per-class accuracy:
+  class 0: 0.0000%
+  class 1: 100.0000%
+  class 2: 0.0000%
+Per-receiver throughput and mean latency:
+  h2/class 0: throughput=0.00 bps mean_latency=0.000 ms packets=0
+  h3/class 1: throughput=36.16 Kbps mean_latency=24.479 ms packets=627
+  h4/class 2: throughput=0.00 bps mean_latency=0.000 ms packets=0
+*** Stopping 0 controllers
+
+*** Stopping 4 links
+....
+*** Stopping 1 switches
+s1 Terminated
+(p4dev-python-venv) p4@p4dev:/media/sf_Project/Project$

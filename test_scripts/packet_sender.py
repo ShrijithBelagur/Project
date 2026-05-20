@@ -86,7 +86,11 @@ def replay_records(
     max_frame_size: int,
 ) -> Dict[str, object]:
     sender_mac = get_if_hwaddr(interface)
-    receiver_mac_by_class = {0: "ff:ff:ff:ff:ff:ff", 1: "ff:ff:ff:ff:ff:ff", 2: "ff:ff:ff:ff:ff:ff"}
+    receiver_mac_by_class = {
+        0: "02:00:00:00:01:01",  # h2
+        1: "02:00:00:00:02:01",  # h3
+        2: "02:00:00:00:03:01",  # h4
+    }
 
     sent_by_class: Counter = Counter()
     skipped_by_reason: Counter = Counter()
@@ -151,7 +155,7 @@ def replay_records(
                 truncated_packets += 1
             packet_id += 1
 
-        if record_index % 100 == 0 and record_index > 0:
+        if record_index % 10 == 0 and record_index > 0:
             elapsed = time.monotonic() - start_monotonic
             print(
                 f"[sender] replayed {record_index} records / {packet_id} packets in {elapsed:.1f}s",
